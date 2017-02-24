@@ -1,0 +1,25 @@
+{
+    "name": "alterego/bitrix-api",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Serhiy Gavka",
+            "email": "sgavka@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://bitbucket.org/sgavka/bitrix-api"
+        }
+    ],
+    "require": {
+        "mesilov/bitrix24-php-sdk": "dev-master",
+        "monolog/monolog": "^1.22",
+        "php-curl-class/php-curl-class": "^7.2"
+    },
+    "autoload": {
+        "classmap": ["classes/", "exceptions/"],
+        "files": ["Bitrix.php"]
+    }
+}
