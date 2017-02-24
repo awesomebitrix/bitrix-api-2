@@ -1,6 +1,8 @@
 {
     "name": "alterego/bitrix-api",
+    "description": "PHP API for Bitrix24, both: box and cloud.",
     "type": "library",
+    "version": "0.0.1-dev",
     "authors": [
         {
             "name": "Serhiy Gavka",
