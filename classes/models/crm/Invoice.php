@@ -1,22 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 27.01.17
- * Time: 16:50
- */
 
-namespace AlterEgo\BitrixAPI\classes\models\crm;
+namespace AlterEgo\BitrixAPI\Classes\Models\Crm;
 
-
-use AlterEgo\BitrixAPI\classes\models\crm\ProductRow;
-use AlterEgo\BitrixAPI\exceptions\ExceptionModelPropertyIsNotSet;
+use AlterEgo\BitrixAPI\Exceptions\ExceptionModelPropertyIsNotSet;
 
 class Invoice
 {
     const UF_MOEDELO_ID = 'MD_ID'; // todo: fix it
-    const UF_MOEDELO_NUMBER = 'MD_NUMBER';
-    const ALTEREGO_MOEDELO_AVOID_UPDATE = 'ALTEREGO_MOEDELO_AVOID_UPDATE';
+    const UF_MOEDELO_NUMBER = 'MD_NUMBER'; // todo: fix it
+    const ALTEREGO_MOEDELO_AVOID_UPDATE = 'ALTEREGO_MOEDELO_AVOID_UPDATE'; // todo: fix it
 
     /**
      * @var integer
@@ -210,155 +202,6 @@ class Invoice
     public function getDatePayBefore()
     {
         return $this->datePayBefore;
-    }
-
-    private function fields() {
-        $fields = array(
-            "ID" => array(
-                "TYPE" => "integer",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "LID" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "ACCOUNT_NUMBER" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::Required)
-            ),
-            "CURRENCY" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "ORDER_TOPIC" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::Required)
-            ),
-            "DATE_BILL" => array(
-                "TYPE" => "date",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::Required)
-            ),
-            "DATE_INSERT" => array(
-                "TYPE" => "datetime",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::Required)
-            ),
-            "DATE_MARKED" => array(
-                "TYPE" => "datetime"
-            ),
-            "DATE_PAY_BEFORE" => array(
-                "TYPE" => "date"
-            ),
-            "DATE_PAYED" => array(
-                "TYPE" => "datetime",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "DATE_STATUS" => array(
-                "TYPE" => "datetime",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "DATE_UPDATE" => array(
-                "TYPE" => "datetime",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "EMP_PAYED_ID" => array(
-                "TYPE" => "integer",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "EMP_STATUS_ID" => array(
-                "TYPE" => "integer",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "PAY_SYSTEM_ID" => array(
-                "TYPE" => "integer",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::Required)
-            ),
-            "STATUS_ID" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::Required)
-            ),
-            "PAY_VOUCHER_DATE" => array(
-                "TYPE" => "date"
-            ),
-            "PAY_VOUCHER_NUM" => array(
-                "TYPE" => "string"
-            ),
-            "PAYED" => array(
-                "TYPE" => "char",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "PERSON_TYPE_ID" => array(
-                "TYPE" => "integer",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::Required)
-            ),
-            "PRICE" => array(
-                "TYPE" => "double",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "REASON_MARKED" => array(
-                "TYPE" => "string"
-            ),
-            "RESPONSIBLE_ID" => array(
-                "TYPE" => "integer"
-            ),
-            "RESPONSIBLE_EMAIL" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "RESPONSIBLE_LOGIN" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "RESPONSIBLE_NAME" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "RESPONSIBLE_LAST_NAME" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "RESPONSIBLE_SECOND_NAME" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "RESPONSIBLE_WORK_POSITION" => array(
-                "TYPE" => "string",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "RESPONSIBLE_PERSONAL_PHOTO" => array(
-                "TYPE" => "integer",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "UF_COMPANY_ID" => array(
-                "TYPE" => "integer",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::Required)
-            ),
-            "UF_CONTACT_ID" => array(
-                "TYPE" => "integer",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::Required)
-            ),
-            "UF_MYCOMPANY_ID" => array(
-                "TYPE" => "integer",
-            ),
-            "UF_DEAL_ID" => array(
-                "TYPE" => "integer",
-            ),
-            "UF_QUOTE_ID" => array(
-                "TYPE" => "integer",
-            ),
-            "COMMENTS" => array(
-                "TYPE" => "string"
-            ),
-            "USER_DESCRIPTION" => array(
-                "TYPE" => "string"
-            ),
-            "TAX_VALUE" => array(
-                "TYPE" => "double",
-                'ATTRIBUTES' => array(CCrmFieldInfoAttr::ReadOnly)
-            ),
-            "PR_LOCATION" => array(
-                "TYPE" => "integer"
-            )
-        );
     }
 
     /**

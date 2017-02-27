@@ -1,17 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 30.01.17
- * Time: 17:26
- */
 
-namespace AlterEgo\BitrixAPI\classes\models\crm;
+namespace AlterEgo\BitrixAPI\Classes\Models\Crm;
 
-
-use AlterEgo\BitrixAPI\classes\models\crm\Invoice;
-use AlterEgo\BitrixAPI\classes\api\common\Iterator;
-use AlterEgo\BitrixAPI\exceptions\ExceptionModelPropertyValueIsInvalid;
+use AlterEgo\BitrixAPI\Classes\Iterator;
+use AlterEgo\BitrixAPI\Exceptions\ExceptionModelPropertyValueIsInvalid;
 
 class RequisiteIterator extends Iterator
 {

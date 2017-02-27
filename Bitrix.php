@@ -2,61 +2,67 @@
 
 namespace AlterEgo\BitrixAPI;
 
-
-use AlterEgo\BitrixAPI\exceptions\ExceptionBitrixSettingNotExists;
-use AlterEgo\BitrixAPI\exceptions\ExceptionNeedBitrix24App;
+use AlterEgo\BitrixAPI\Exceptions\ExceptionAppTypeInvalid;
+use AlterEgo\BitrixAPI\Exceptions\ExceptionAppTypeIsNotSet;
+use AlterEgo\BitrixAPI\Exceptions\ExceptionNeedBitrix24App;
 use Bitrix24\Bitrix24;
 
+/**
+ * Class Bitrix is a singleton.
+ * @package AlterEgo\BitrixAPI
+ */
 class Bitrix
 {
     /**
      * Self-hosted version
      */
-    const APP_TYPE_BITRIX = 'bitrix';
+    const APP_TYPE_BITRIX_BOX = 'bitrix-box';
 
     /**
      * Cloud version
      */
-    const APP_TYPE_BITRIX24 = 'bitrix24';
+    const APP_TYPE_BITRIX_CLOUD = 'bitrix-cloud';
 
     private $type;
 
     /**
      * @var Bitrix24|null
      */
-    private $bitrixApp;
+    private $bitrixCloudApp;
 
     private static $app;
 
     /**
      * Bitrix constructor.
      * @param $type
-     * @param Bitrix24|null $bitrix24App
+     * @param Bitrix24|null $bitrixCloudApp
      *
      * @throws \Exception
      */
-    private function __construct($type, Bitrix24 $bitrix24App = null)
+    private function __construct($type, Bitrix24 $bitrixCloudApp = null)
     {
-        if ($type == self::APP_TYPE_BITRIX24) {
-            if (is_null($bitrix24App)) {
+        if ($type === self::APP_TYPE_BITRIX_CLOUD) {
+            if (is_null($bitrixCloudApp)) {
                 throw new ExceptionNeedBitrix24App('For app type BITRIX24 (cloud) need to set param `$bitrix24App`.');
             }
-        } else if ($type == self::APP_TYPE_BITRIX) {
-            // todo: create for Bitrix
+        } else if ($type === self::APP_TYPE_BITRIX_BOX) {
+            // todo: create for Bitrix Box
+        } else {
+            throw new ExceptionAppTypeInvalid("App type {$type} in not accepted.");
         }
 
         $this->type = $type;
-        $this->bitrixApp = $bitrix24App;
+        $this->bitrixCloudApp = $bitrixCloudApp;
     }
 
-    public static function getApp($type = null, Bitrix24 $bitrix24App = null)
+    public static function getApp($type = null, Bitrix24 $bitrixCloudApp = null)
     {
         if (is_null(self::$app)) {
             if (is_null($type)) {
-                throw new \Exception("Param `\$type` is not set.");
+                throw new ExceptionAppTypeIsNotSet("Param `\$type` is not set.");
             }
 
-            self::$app = new self($type, $bitrix24App);
+            self::$app = new self($type, $bitrixCloudApp);
         }
 
         return self::$app;
@@ -65,17 +71,17 @@ class Bitrix
     /**
      * @return bool
      */
-    public function isBitrixApp()
+    public function isBitrixBoxApp()
     {
-        return $this->type === self::APP_TYPE_BITRIX;
+        return $this->type === self::APP_TYPE_BITRIX_BOX;
     }
 
     /**
      * @return bool
      */
-    public function isBitrix24App()
+    public function isBitrixCloudApp()
     {
-        return $this->type === self::APP_TYPE_BITRIX24;
+        return $this->type === self::APP_TYPE_BITRIX_CLOUD;
     }
 
     /**
@@ -89,37 +95,8 @@ class Bitrix
     /**
      * @return Bitrix24
      */
-    public function getBitrixApp()
+    public function getBitrixCloudApp()
     {
-        return $this->bitrixApp;
-    }
-
-    private static $settings = array();
-
-    public function getSettings()
-    { // todo: make difference for bitrix and bitrix24
-        if (!count(self::$settings)) {
-            self::$settings = array(
-                'bitrix_unit_pieces' => '',
-                'bitrix_unit_hours' => '',
-            );
-        }
-
-        return self::$settings;
-    }
-
-    public function getSetting($name, $default = null)
-    {
-        $settings = $this->getSettings();
-
-        if (!array_key_exists($name, $settings)) {
-            if (is_null($default)) {
-                throw new ExceptionBitrixSettingNotExists("Setting {$name} don't exists.");
-            }
-
-            return $default;
-        }
-
-        return $settings[$name];
+        return $this->bitrixCloudApp;
     }
 }

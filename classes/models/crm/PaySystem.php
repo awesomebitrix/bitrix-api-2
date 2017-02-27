@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 27.01.17
- * Time: 16:50
- */
 
-namespace AlterEgo\BitrixAPI\classes\models\crm;
-
+namespace AlterEgo\BitrixAPI\Classes\Models\Crm;
 
 class PaySystem
 {

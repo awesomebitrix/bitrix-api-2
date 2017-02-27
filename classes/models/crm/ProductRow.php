@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 31.01.17
- * Time: 14:32
- */
 
-namespace AlterEgo\BitrixAPI\classes\models\crm;
+namespace AlterEgo\BitrixAPI\Classes\Models\Crm;
 
 
 class ProductRow

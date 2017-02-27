@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 01.02.17
- * Time: 17:12
- */
 
-namespace AlterEgo\BitrixAPI\classes\models\crm;
-
+namespace AlterEgo\BitrixAPI\Classes\Models\Crm;
 
 class UserField
 {
@@ -166,40 +159,6 @@ class UserField
         $array['HELP_MESSAGE'] = $this->getHelpMessage();
 
         return $array;
-
-        /*
-         *      'ENTITY_ID' => 'ORDER',
-                'FIELD_NAME' => self::ORDER_MOEDELO_NUMBER_FIELD,
-                'USER_TYPE_ID' => 'integer',
-                'XML_ID' => 'XML_MOEDELO_NUMBER',
-                'SORT' => 500,
-                'MULTIPLE' => 'N',
-                'MANDATORY' => 'N',
-                'SHOW_FILTER' => 'N',
-                'SHOW_IN_LIST' => 'Y',
-                'EDIT_IN_LIST' => 'Y',
-                'IS_SEARCHABLE' => 'Y',
-                'EDIT_FORM_LABEL' => array(
-                    'ru' => 'МоёДело Number',
-                    'en' => 'MoeDelo Number',
-                ),
-                'LIST_COLUMN_LABEL' => array(
-                    'ru' => 'МоёДело Number',
-                    'en' => 'MoeDelo Number',
-                ),
-                'LIST_FILTER_LABEL' => array(
-                    'ru' => 'МоёДело Number',
-                    'en' => 'MoeDelo Number',
-                ),
-                    'ERROR_MESSAGE' => array(
-                    'ru' => 'Ошибка при заполнении МоёДело Number',
-                    'en' => 'An error in completing the MoeDelo Number',
-                ),
-                            'HELP_MESSAGE' => array(
-                    'ru' => '',
-                    'en' => '',
-                ),
-         * */
     }
 
     /**
@@ -628,45 +587,4 @@ class UserField
     {
         return $this->xmlId;
     }
-
-    /*
-     *  EDIT_FORM_LABEL
-        Object {type="string", ...}
-        EDIT_IN_LIST
-        Object {type="char", ...}
-        ENTITY_ID
-        Object {type="string", title="Объект", isImmutable=true}
-        ERROR_MESSAGE
-        Object {type="string", title="Сообщение об ошибке"}
-        FIELD_NAME
-        Object {type="string", title="Код", isImmutable=true}
-        HELP_MESSAGE
-        Object {type="string", title="Помощь"}
-        ID
-        Object {type="int", title="Ид", isReadOnly=true}
-        IS_SEARCHABLE
-        Object {type="char", ...}
-        LIST
-        Object {type="uf_enum_element", title="Элементы списка", ...}
-        LIST_COLUMN_LABEL
-        Object {type="string", title="Заголовок в списке"}
-        LIST_FILTER_LABEL
-        Object {type="string", title="Подпись фильтра в списке"}
-        MANDATORY
-        Object {type="char", title="Обязательное"}
-        MULTIPLE
-        Object {type="char", title="Множественное"}
-        SETTINGS
-        Object {type="object", ...}
-        SHOW_FILTER
-        Object {type="char", title="Показывать в фильтре списка"}
-        SHOW_IN_LIST
-        Object {type="char", title="Показывать в списке"}
-        SORT
-        Object {type="int", title="Сортировка"}
-        USER_TYPE_ID
-        Object {type="string", title="Тип данных", ...}
-        XML_ID
-        Object {type="string", title="Внешний Ид (XML ID)"}
-     * */
 }

@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 30.01.17
- * Time: 17:26
- */
 
-namespace AlterEgo\BitrixAPI\classes\models\measure;
+namespace AlterEgo\BitrixAPI\Classes\Models\Measure;
 
-use AlterEgo\BitrixAPI\classes\api\common\Iterator;
+use AlterEgo\BitrixAPI\Classes\Iterator;
 
 class MeasureIterator extends Iterator
 {

@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 14.02.17
- * Time: 15:08
- */
 
-namespace AlterEgo\BitrixAPI\exceptions;
+namespace AlterEgo\BitrixAPI\Exceptions;
 
-
-class ExceptionNeedBitrix24App extends \Exception
+class ExceptionNeedBitrix24App extends ExceptionBitrixApi
 {
 
 }

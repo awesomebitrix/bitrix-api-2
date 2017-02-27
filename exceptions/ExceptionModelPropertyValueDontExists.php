@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 14.02.17
- * Time: 15:14
- */
 
-namespace AlterEgo\BitrixAPI\exceptions;
+namespace AlterEgo\BitrixAPI\Exceptions;
 
-
-class ExceptionModelPropertyValueDontExists extends \Exception
+class ExceptionModelPropertyValueDontExists extends ExceptionBitrixApi
 {
 
 }

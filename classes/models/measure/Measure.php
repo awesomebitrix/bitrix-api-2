@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 15.02.17
- * Time: 14:44
- */
 
-namespace AlterEgo\BitrixAPI\classes\models\measure;
-
+namespace AlterEgo\BitrixAPI\Classes\Models\Measure;
 
 class Measure
 {

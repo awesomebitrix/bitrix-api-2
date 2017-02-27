@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 27.01.17
- * Time: 16:50
- */
 
-namespace AlterEgo\BitrixAPI\classes\models\entity;
+namespace AlterEgo\BitrixAPI\Classes\Models\Entity;
 
-use AlterEgo\BitrixAPI\exceptions\ExceptionModelPropertyValueDontExists;
+use AlterEgo\BitrixAPI\Exceptions\ExceptionModelPropertyValueDontExists;
 
 class EntityItem
 {
