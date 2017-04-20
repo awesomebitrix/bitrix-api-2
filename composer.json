@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "mesilov/bitrix24-php-sdk": "dev-master",
+        "sgavka/bitrix24-php-sdk": "dev-master",
         "monolog/monolog": "^1.22",
         "php-curl-class/php-curl-class": "^7.2"
     },
