@@ -1,10 +1,11 @@
 <?php
 
-namespace AlterEgo\BitrixAPI\classes\api\common\Measure;
+namespace AlterEgo\BitrixAPI\Classes\Api\Common\Measure;
 
 use AlterEgo\BitrixAPI\Classes\Entity as EntityAbstract;
 use AlterEgo\BitrixAPI\Classes\EntityQuery;
-use AlterEgo\BitrixAPI\classes\Models\Measure\MeasureIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Measure\Measure;
+use AlterEgo\BitrixAPI\Classes\Models\Measure\MeasureIterator;
 
 class MeasureApi extends EntityAbstract
 {
@@ -20,7 +21,7 @@ class MeasureApi extends EntityAbstract
 
     /**
      * @param $code
-     * @return bool|\AlterEgo\BitrixAPI\classes\Models\Measure\Measure
+     * @return bool|Measure
      */
     public function getByCode($code)
     {

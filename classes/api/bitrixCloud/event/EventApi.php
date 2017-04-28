@@ -1,33 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 27.01.17
- * Time: 16:49
- */
 
 namespace AlterEgo\BitrixAPI\Classes\Api\BitrixCloud\Event;
 
+use AlterEgo\BitrixAPI\Classes\Entity;
+use AlterEgo\BitrixAPI\Classes\Models\Event\Event;
+use AlterEgo\BitrixAPI\Classes\Models\Event\EventIterator;
 
-use AlterEgo\BitrixAPI\classes\api\common\Entity as EntityAbstract;
-use AlterEgo\BitrixAPI\classes\api\common\EntityQuery;
-use AlterEgo\BitrixAPI\classes\api\common\Filter;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserField;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserFieldIterator;
-use AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemProperty;
-use AlterEgo\BitrixAPI\classes\Models\EventIterator;
-use Bitrix24\Exceptions\Bitrix24Exception;
-
-class EventApi extends EntityAbstract
+class EventApi extends Entity
 {
     /**
      * @param string|null $scope
-     * @return \string[]
+     * @return string[]
      */
     public function getAll($scope = null)
     {
-        $eventApi = new \Bitrix24\Event\Event($this->getClient()->getBitrixApp());
+        $eventApi = new \Bitrix24\Event\Event($this->getClient()->getBitrixCloudApp());
 
         $response = $eventApi->getList($scope);
 
@@ -39,7 +26,7 @@ class EventApi extends EntityAbstract
      */
     public function get()
     {
-        $eventApi = new \Bitrix24\Event\Event($this->getClient()->getBitrixApp());
+        $eventApi = new \Bitrix24\Event\Event($this->getClient()->getBitrixCloudApp());
 
         $response = $eventApi->get();
 
@@ -49,13 +36,13 @@ class EventApi extends EntityAbstract
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Event $event
+     * @param Event $event
      *
      * @return boolean
      */
-    public function bind(\AlterEgo\BitrixAPI\classes\Models\Event $event)
+    public function bind(Event $event)
     {
-        $eventApi = new \Bitrix24\Event\Event($this->getClient()->getBitrixApp());
+        $eventApi = new \Bitrix24\Event\Event($this->getClient()->getBitrixCloudApp());
 
         $response = $eventApi->bind($event->getEvent(), $event->getHandler(), $event->getAuthType());
 
@@ -63,13 +50,13 @@ class EventApi extends EntityAbstract
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Event $event
+     * @param Event $event
      *
      * @return integer Count of deleted events
      */
-    public function unbind(\AlterEgo\BitrixAPI\classes\Models\Event $event)
+    public function unbind(Event $event)
     {
-        $eventApi = new \Bitrix24\Event\Event($this->getClient()->getBitrixApp());
+        $eventApi = new \Bitrix24\Event\Event($this->getClient()->getBitrixCloudApp());
 
         $response = $eventApi->unbind($event->getEvent(), $event->getHandler(), $event->getAuthType());
 

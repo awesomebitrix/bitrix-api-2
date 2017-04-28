@@ -5,35 +5,37 @@ namespace AlterEgo\BitrixAPI\Classes\Api\BitrixCloud\Entity;
 use AlterEgo\BitrixAPI\Classes\Entity as EntityAbstract;
 use AlterEgo\BitrixAPI\Classes\EntityQuery;
 use AlterEgo\BitrixAPI\Classes\Filter;
-use AlterEgo\BitrixAPI\classes\Models\Entity\EntityItem;
-use AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemProperty;
+use AlterEgo\BitrixAPI\Classes\Models\Entity\EntityItem;
+use AlterEgo\BitrixAPI\Classes\Models\Entity\EntityItemIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Entity\EntityItemProperty;
+use Bitrix24\Entity\Entity;
 
 class EntityApi extends EntityAbstract
 {
     /**
      * @param string $name
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Entity\Entity
+     * @return \AlterEgo\BitrixAPI\Classes\Models\Entity\Entity
      */
     public function get($name)
     {
-        $entityApi = new \Bitrix24\Entity\Entity($this->getClient()->getBitrixCloudApp());
+        $entityApi = new Entity($this->getClient()->getBitrixCloudApp());
 
         $response = $entityApi->get($name);
 
-        $entity = \AlterEgo\BitrixAPI\classes\Models\Entity\Entity::CreateFromArray($response['result']);
+        $entity = \AlterEgo\BitrixAPI\Classes\Models\Entity\Entity::CreateFromArray($response['result']);
 
         return $entity;
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Entity\Entity $entity
+     * @param \AlterEgo\BitrixAPI\Classes\Models\Entity\Entity $entity
      *
      * @return array
      */
-    public function create(\AlterEgo\BitrixAPI\classes\Models\Entity\Entity $entity)
+    public function create(\AlterEgo\BitrixAPI\Classes\Models\Entity\Entity $entity)
     {
-        $entityApi = new \Bitrix24\Entity\Entity($this->getClient()->getBitrixCloudApp());
+        $entityApi = new Entity($this->getClient()->getBitrixCloudApp());
 
         $response = $entityApi->add($entity->getEntity(), $entity->getName(), $entity->getAccess());
 
@@ -47,7 +49,7 @@ class EntityApi extends EntityAbstract
      */
     public function delete($entity)
     {
-        $entityApi = new \Bitrix24\Entity\Entity($this->getClient()->getBitrixCloudApp());
+        $entityApi = new Entity($this->getClient()->getBitrixCloudApp());
 
         $response = $entityApi->delete($entity);
 
@@ -62,7 +64,7 @@ class EntityApi extends EntityAbstract
      */
     public function itemDelete($entity, $id)
     {
-        $entityApi = new \Bitrix24\Entity\Entity($this->getClient()->getBitrixCloudApp());
+        $entityApi = new Entity($this->getClient()->getBitrixCloudApp());
 
         $response = $entityApi->itemDelete($entity, $id);
 
@@ -77,7 +79,7 @@ class EntityApi extends EntityAbstract
      */
     public function itemGet($entityName, $code)
     {
-        $entityApi = new \Bitrix24\Entity\Entity($this->getClient()->getBitrixCloudApp());
+        $entityApi = new Entity($this->getClient()->getBitrixCloudApp());
 
         $query = new EntityQuery();
         $query->addWhere('CODE', Filter::TYPE_EQUAL, $code);
@@ -88,7 +90,7 @@ class EntityApi extends EntityAbstract
             $query->getFilter()->asArray()
         );
 
-        $entityItemIterator = new \AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemIterator($response['result']);
+        $entityItemIterator = new EntityItemIterator($response['result']);
 
         return $entityItemIterator->current();
     }
@@ -99,7 +101,7 @@ class EntityApi extends EntityAbstract
      */
     public function itemCreate(EntityItem $entityItem)
     {
-        $entityApi = new \Bitrix24\Entity\Entity($this->getClient()->getBitrixCloudApp());
+        $entityApi = new Entity($this->getClient()->getBitrixCloudApp());
 
         $response = $entityApi->itemAdd($entityItem->getEntity(), $entityItem->getName(), $entityItem->toArray());
 
@@ -112,7 +114,7 @@ class EntityApi extends EntityAbstract
      */
     public function itemUpdate(EntityItem $entityItem)
     {
-        $entityApi = new \Bitrix24\Entity\Entity($this->getClient()->getBitrixCloudApp());
+        $entityApi = new Entity($this->getClient()->getBitrixCloudApp());
 
         $response = $entityApi->itemUpdate($entityItem->getEntity(), $entityItem->getId(), $entityItem->toArray());
 
@@ -167,7 +169,7 @@ class EntityApi extends EntityAbstract
      */
     public function itemPropertyDelete($entity, $property)
     {
-        $entityApi = new \Bitrix24\Entity\Entity($this->getClient()->getBitrixCloudApp());
+        $entityApi = new Entity($this->getClient()->getBitrixCloudApp());
 
         $response = $entityApi->itemPropertyDelete($entity, $property);
 
@@ -175,12 +177,12 @@ class EntityApi extends EntityAbstract
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemProperty $entityItemProperty
+     * @param EntityItemProperty $entityItemProperty
      * @return boolean
      */
-    public function itemPropertyCreate(\AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemProperty $entityItemProperty)
+    public function itemPropertyCreate(EntityItemProperty $entityItemProperty)
     {
-        $entityApi = new \Bitrix24\Entity\Entity($this->getClient()->getBitrixCloudApp());
+        $entityApi = new Entity($this->getClient()->getBitrixCloudApp());
 
         $response = $entityApi->itemPropertyAdd(
             $entityItemProperty->getEntity(),
@@ -200,11 +202,11 @@ class EntityApi extends EntityAbstract
      */
     public function itemPropertyGet($entity, $property)
     {
-        $entityApi = new \Bitrix24\Entity\Entity($this->getClient()->getBitrixCloudApp());
+        $entityApi = new Entity($this->getClient()->getBitrixCloudApp());
 
         $response = $entityApi->itemPropertyGet($entity, $property);
 
-        $entityItem = \AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemProperty::CreateFromArray($response['result']);
+        $entityItem = EntityItemProperty::CreateFromArray($response['result']);
 
         return $entityItem;
     }

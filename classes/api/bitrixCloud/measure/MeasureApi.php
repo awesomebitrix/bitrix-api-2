@@ -1,20 +1,15 @@
 <?php
 
-namespace AlterEgo\BitrixAPI\classes\Api\BitrixCloud\Measure;
+namespace AlterEgo\BitrixAPI\Classes\Api\BitrixCloud\Measure;
 
-use AlterEgo\BitrixAPI\classes\api\common\Entity as EntityAbstract;
-use AlterEgo\BitrixAPI\classes\api\common\EntityQuery;
-use AlterEgo\BitrixAPI\classes\api\common\Filter;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserField;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserFieldIterator;
-use AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemProperty;
-use AlterEgo\BitrixAPI\classes\Models\EventIterator;
-use AlterEgo\BitrixAPI\classes\Models\Measure\MeasureIterator;
+use AlterEgo\BitrixAPI\Classes\Entity;
+use AlterEgo\BitrixAPI\Classes\EntityQuery;
+use AlterEgo\BitrixAPI\Classes\Filter;
+use AlterEgo\BitrixAPI\Classes\Models\Measure\Measure;
+use AlterEgo\BitrixAPI\Classes\Models\Measure\MeasureIterator;
 use AlterEgo\BitrixAPI\Exceptions\ExceptionIteratorInvalidPosition;
-use Bitrix24\Exceptions\Bitrix24Exception;
 
-class MeasureApi extends EntityAbstract
+class MeasureApi extends Entity
 {
     /**
      * @param EntityQuery $query
@@ -22,7 +17,7 @@ class MeasureApi extends EntityAbstract
      */
     public function getList(EntityQuery $query)
     {
-        $measureApi = new \Bitrix24\Measure\Measure($this->getClient()->getBitrixApp());
+        $measureApi = new \Bitrix24\Measure\Measure($this->getClient()->getBitrixCloudApp());
 
         $response = $measureApi->getList(
             $query->getOrder()->asArray(),
@@ -30,17 +25,21 @@ class MeasureApi extends EntityAbstract
             $query->getSelect()->asArray()
         );
 
-        return new MeasureIterator($response);
+        return new MeasureIterator($response['result']);
     }
 
     /**
      * @param $code
-     * @return bool|\AlterEgo\BitrixAPI\classes\Models\Measure\Measure
+     * @return bool|Measure
      */
     public function getByCode($code)
     {
         $query = new EntityQuery();
-        $query->addWhere('CODE', Filter::TYPE_EQUAL, $code);
+        $query->addWhere(
+            'CODE',
+            Filter::TYPE_EQUAL,
+            $code
+        ); // todo: to come up with a way to store the descriptions of Bitrix's entities
 
         try {
             return $this->getList($query)->current();

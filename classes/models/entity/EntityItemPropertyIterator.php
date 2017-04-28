@@ -4,6 +4,11 @@ namespace AlterEgo\BitrixAPI\Classes\Models\Entity;
 
 use AlterEgo\BitrixAPI\Classes\Iterator;
 
+/**
+ * Class EntityItemPropertyIterator
+ * @package AlterEgo\BitrixAPI\Classes\Models\Entity
+ * @method EntityItemProperty current()
+ */
 class EntityItemPropertyIterator extends Iterator
 {
     /**

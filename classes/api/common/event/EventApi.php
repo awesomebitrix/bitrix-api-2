@@ -2,16 +2,11 @@
 
 namespace AlterEgo\BitrixAPI\Classes\Api\Common\Event;
 
-use AlterEgo\BitrixAPI\classes\api\common\Entity as EntityAbstract;
-use AlterEgo\BitrixAPI\classes\api\common\EntityQuery;
-use AlterEgo\BitrixAPI\classes\api\Filter;
-use AlterEgo\BitrixAPI\classes\api\Order;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
-use AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemProperty;
-use AlterEgo\BitrixAPI\classes\Models\Entity\EntityIterator;
-use AlterEgo\BitrixAPI\classes\Models\EventIterator;
+use AlterEgo\BitrixAPI\Classes\Entity;
+use AlterEgo\BitrixAPI\Classes\Models\Entity\EntityIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Event\Event;
 
-class EventApi extends EntityAbstract
+class EventApi extends Entity
 {
     /**
      * @param string|null $scope
@@ -32,19 +27,19 @@ class EventApi extends EntityAbstract
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Event $event
+     * @param Event $event
      * @return boolean
      */
-    public function bind(\AlterEgo\BitrixAPI\classes\Models\Event $event)
+    public function bind(Event $event)
     {
         return $this->call(__FUNCTION__, array($event));
     }
 
     /**
-    * @param \AlterEgo\BitrixAPI\classes\Models\Event $event
+    * @param Event $event
     * @return integer Count of deleted events
     */
-    public function unbind(\AlterEgo\BitrixAPI\classes\Models\Event $event)
+    public function unbind(Event $event)
     {
         return $this->call(__FUNCTION__, array($event));
     }

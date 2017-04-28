@@ -1,27 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 27.01.17
- * Time: 16:49
- */
 
 namespace AlterEgo\BitrixAPI\Classes\Api\BitrixCloud\Crm;
 
-
-use AlterEgo\BitrixAPI\classes\api\common\Crm\Requisite as RequisiteApi;
-use AlterEgo\BitrixAPI\classes\api\common\Entity;
-use AlterEgo\BitrixAPI\classes\api\common\EntityQuery;
-use AlterEgo\BitrixAPI\classes\api\common\Filter;
-use AlterEgo\BitrixAPI\classes\api\common\Select;
-use AlterEgo\BitrixAPI\classes\Models\Crm\CompanyIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\Requisite;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserField;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserFieldIterator;
-use AlterEgo\BitrixAPI\Exceptions\ExceptionIteratorInvalidPosition;
+use AlterEgo\BitrixAPI\Classes\Api\Common\Crm\RequisiteApi;
+use AlterEgo\BitrixAPI\Classes\Entity;
+use AlterEgo\BitrixAPI\Classes\EntityQuery;
+use AlterEgo\BitrixAPI\Classes\Filter;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\CompanyIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\UserFieldIterator;
 use AlterEgo\MoeDeloAPI\BitrixConst;
-use Bitrix24\Exceptions\Bitrix24Exception;
+use Bitrix24\CRM\Company;
+use Bitrix24\CRM\Company\UserField;
 
 class CompanyApi extends Entity
 {
@@ -32,7 +21,7 @@ class CompanyApi extends Entity
      */
     public function getList(EntityQuery $query)
     {
-        $invoice = new \Bitrix24\CRM\Company($this->getClient()->getBitrixApp());
+        $invoice = new Company($this->getClient()->getBitrixCloudApp());
 
         $response = $invoice->getList(
             $query->getOrder()->asArray(),
@@ -46,15 +35,15 @@ class CompanyApi extends Entity
 
     /**
      * @param integer $id
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\Company
+     * @return \AlterEgo\BitrixAPI\Classes\Models\Crm\Company
      */
     public function getById($id)
     {
-        $companyApi = new \Bitrix24\CRM\Company($this->getClient()->getBitrixApp());
+        $companyApi = new Company($this->getClient()->getBitrixCloudApp());
 
         $response = $companyApi->get($id);
 
-        $company = \AlterEgo\BitrixAPI\classes\Models\Crm\Company::CreateFromArray($response['result']);
+        $company = \AlterEgo\BitrixAPI\Classes\Models\Crm\Company::CreateFromArray($response['result']);
 
         return $company;
     }
@@ -62,21 +51,29 @@ class CompanyApi extends Entity
     /**
      * @param integer $moeDeloId
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\Company
+     * @return \AlterEgo\BitrixAPI\Classes\Models\Crm\Company
      * @throws \Exception
      */
     public function getByMoeDeloId($moeDeloId)
     {
         $query = new EntityQuery();
-        $query->addWhere('UF_CRM_'. \AlterEgo\BitrixAPI\classes\Models\Crm\Company::UF_MOEDELO_ID, Filter::TYPE_EQUAL, $moeDeloId); // todo: fix (maybe it is only for bitrix24)
-        $query->addWhere('UF_CRM_'. \AlterEgo\BitrixAPI\classes\Models\Crm\Company::UF_MOEDELO_ID, Filter::TYPE_NOT_EQUAL, 'null'); // todo: fix it // todo: fix (maybe it is only for bitrix24)
+        $query->addWhere(
+            'UF_CRM_' . \AlterEgo\BitrixAPI\Classes\Models\Crm\Company::UF_MOEDELO_ID,
+            Filter::TYPE_EQUAL,
+            $moeDeloId
+        ); // todo: fix (maybe it is only for bitrix24)
+        $query->addWhere(
+            'UF_CRM_' . \AlterEgo\BitrixAPI\Classes\Models\Crm\Company::UF_MOEDELO_ID,
+            Filter::TYPE_NOT_EQUAL,
+            'null'
+        ); // todo: fix it // todo: fix (maybe it is only for bitrix24)
 
         $query->addSelect('*'); // todo: fix it // todo: fix (maybe it is only for bitrix24)
         $query->addSelect('UF_*'); // todo: fix it // todo: fix (maybe it is only for bitrix24)
 
         $companyIterator = $this->getList($query);
 
-        /** @var \AlterEgo\BitrixAPI\classes\Models\Crm\Company $company */
+        /** @var \AlterEgo\BitrixAPI\Classes\Models\Crm\Company $company */
         $company = $companyIterator->current();
 
         /*if ($company->getUfMoedeloId() != $moeDeloId) {
@@ -87,12 +84,12 @@ class CompanyApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Company $company
+     * @param \AlterEgo\BitrixAPI\Classes\Models\Crm\Company $company
      * @return integer|boolean
      */
-    public function create(\AlterEgo\BitrixAPI\classes\Models\Crm\Company $company)
+    public function create(\AlterEgo\BitrixAPI\Classes\Models\Crm\Company $company)
     {
-        $companyApi = new \Bitrix24\CRM\Company($this->getClient()->getBitrixApp());
+        $companyApi = new Company($this->getClient()->getBitrixCloudApp());
 
         $response = $companyApi->add($company->toArray());
 
@@ -100,12 +97,12 @@ class CompanyApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Company $company
+     * @param \AlterEgo\BitrixAPI\Classes\Models\Crm\Company $company
      * @return boolean
      */
-    public function update(\AlterEgo\BitrixAPI\classes\Models\Crm\Company $company)
+    public function update(\AlterEgo\BitrixAPI\Classes\Models\Crm\Company $company)
     {
-        $companyApi = new \Bitrix24\CRM\Company($this->getClient()->getBitrixApp());
+        $companyApi = new Company($this->getClient()->getBitrixCloudApp());
 
         $response = $companyApi->update($company->getId(), $company->toArray());
 
@@ -113,13 +110,13 @@ class CompanyApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\UserField $userField
+     * @param \AlterEgo\BitrixAPI\Classes\Models\Crm\UserField $userField
      *
      * @return array
      */
-    public function userFieldCreate(\AlterEgo\BitrixAPI\classes\Models\Crm\UserField $userField)
+    public function userFieldCreate(\AlterEgo\BitrixAPI\Classes\Models\Crm\UserField $userField)
     {
-        $invoiceUserFieldApi = new \Bitrix24\CRM\Company\UserField($this->getClient()->getBitrixApp());
+        $invoiceUserFieldApi = new UserField($this->getClient()->getBitrixCloudApp());
 
         $response = $invoiceUserFieldApi->add($userField->toArray());
 
@@ -128,7 +125,7 @@ class CompanyApi extends Entity
 
     public function userFieldDelete($userFieldId)
     {
-        $invoiceUserFieldApi = new \Bitrix24\CRM\Company\UserField($this->getClient()->getBitrixApp());
+        $invoiceUserFieldApi = new UserField($this->getClient()->getBitrixCloudApp());
 
         $response = $invoiceUserFieldApi->delete($userFieldId);
 
@@ -137,7 +134,7 @@ class CompanyApi extends Entity
 
     public function userFieldGetList(EntityQuery $query)
     {
-        $invoiceUserField = new \Bitrix24\CRM\Company\UserField($this->getClient()->getBitrixApp());
+        $invoiceUserField = new UserField($this->getClient()->getBitrixCloudApp());
 
         $response = $invoiceUserField->getList(
             $query->getOrder()->asArray(),
@@ -149,7 +146,7 @@ class CompanyApi extends Entity
 
     /**
      * @param $fieldName
-     * @return UserField
+     * @return \AlterEgo\BitrixAPI\Classes\Models\Crm\UserField
      * @throws \Exception
      */
     public function userFieldGetByFieldName($fieldName)
@@ -160,7 +157,7 @@ class CompanyApi extends Entity
         $invoiceIterator = $this->userFieldGetList($query);
 
         try {
-            /** @var UserField $userField */
+            /** @var \AlterEgo\BitrixAPI\Classes\Models\Crm\UserField $userField */
             while ($userField = $invoiceIterator->current()) { // todo: fix it
                 if ($userField->getFieldName() == $fieldName) {
                     break;
@@ -183,14 +180,14 @@ class CompanyApi extends Entity
     {
         $company = self::getById($moeDeloId);
 
-        $requisiteApi = new Requisite($this->getClient());
+        $requisiteApi = new RequisiteApi($this->getClient());
 
         $requisiteQuery = new EntityQuery();
         $requisiteQuery->addWhere('ENTITY_ID', Filter::TYPE_EQUAL, $company->getId())
             ->addWhere('ENTITY_TYPE_ID', Filter::TYPE_EQUAL, BitrixConst::CCrmOwnerTypeCompany);
         $requisites = $requisiteApi->getList($requisiteQuery)->all();
 
-        /** @var Requisite $requisite */
+        /** @var \AlterEgo\BitrixAPI\Classes\Models\Crm\Requisite $requisite */
         foreach ($requisites as &$requisite) {
             $addressQuery = new EntityQuery();
             $addressQuery->addWhere('ENTITY_TYPE_ID', Filter::TYPE_EQUAL, BitrixConst::CCrmOwnerTypeRequisite)

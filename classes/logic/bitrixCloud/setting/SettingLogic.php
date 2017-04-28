@@ -56,7 +56,7 @@ class SettingLogic extends Entity
             $values = array();
             foreach ($settings as $key => $value) {
                 $flag = true;
-                if ($this->isSettingItemPropertyEntityExists($key)) {
+                if (!$this->isSettingItemPropertyEntityExists($key)) {
                     $itemProperty = new EntityItemProperty();
                     $itemProperty->setEntity(self::SETTING_ENTITY);
                     $itemProperty->setType(EntityItemProperty::TYPE_STRING);
@@ -71,7 +71,7 @@ class SettingLogic extends Entity
                 }
             }
 
-            $settingItem->setPropertyValues($settings);
+            $settingItem->setPropertyValues($values);
             $result = $entityApi->itemUpdate($settingItem);
 
             return $result;
@@ -79,7 +79,6 @@ class SettingLogic extends Entity
 
         return false;
     }
-
 
     /**
      * @param string $name

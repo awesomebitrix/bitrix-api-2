@@ -18,10 +18,14 @@ class Bitrix
      */
     const APP_TYPE_BITRIX_BOX = 'bitrix-box';
 
+    const APP_TYPE_CLASS_BITRIX_BOX = 'BitrixBox';
+
     /**
      * Cloud version
      */
     const APP_TYPE_BITRIX_CLOUD = 'bitrix-cloud';
+
+    const APP_TYPE_CLASS_BITRIX_CLOUD = 'BitrixCloud';
 
     private $type;
 
@@ -43,7 +47,7 @@ class Bitrix
     {
         if ($type === self::APP_TYPE_BITRIX_CLOUD) {
             if (is_null($bitrixCloudApp)) {
-                throw new ExceptionNeedBitrix24App('For app type BITRIX24 (cloud) need to set param `$bitrix24App`.');
+                throw new ExceptionNeedBitrix24App('For app type Bitrix24 Cloud need to set param `$bitrix24App`.');
             }
         } else if ($type === self::APP_TYPE_BITRIX_BOX) {
             // todo: create for Bitrix Box
@@ -89,7 +93,12 @@ class Bitrix
      */
     public function getType()
     {
-        return $this->type;
+        $types = [
+            self::APP_TYPE_BITRIX_BOX => self::APP_TYPE_CLASS_BITRIX_BOX,
+            self::APP_TYPE_BITRIX_CLOUD => self::APP_TYPE_CLASS_BITRIX_CLOUD,
+        ];
+
+        return $types[$this->type];
     }
 
     /**

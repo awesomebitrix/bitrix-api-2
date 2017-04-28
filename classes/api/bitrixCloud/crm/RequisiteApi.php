@@ -1,28 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 27.01.17
- * Time: 16:49
- */
 
 namespace AlterEgo\BitrixAPI\Classes\Api\BitrixCloud\Crm;
 
-
-use AlterEgo\BitrixAPI\classes\api\common\Entity;
-use AlterEgo\BitrixAPI\classes\api\common\EntityQuery;
-use AlterEgo\BitrixAPI\classes\api\common\Filter;
-use AlterEgo\BitrixAPI\classes\Models\Crm\AddressIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\BankDetail;
-use AlterEgo\BitrixAPI\classes\Models\Crm\BankDetailIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\PersonTypeIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\PresetIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\RequisiteIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserField;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserFieldIterator;
-use AlterEgo\MoeDeloAPI\BitrixConst;
-use Bitrix24\Exceptions\Bitrix24Exception;
+use AlterEgo\BitrixAPI\Classes\Entity;
+use AlterEgo\BitrixAPI\Classes\EntityQuery;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\Address;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\AddressIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\BankDetail;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\BankDetailIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\Preset;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\PresetIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\Requisite;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\RequisiteIterator;
 
 class RequisiteApi extends Entity
 {
@@ -33,7 +22,7 @@ class RequisiteApi extends Entity
      */
     public function getList(EntityQuery $query)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->getList(
             $query->getOrder()->asArray(),
@@ -44,12 +33,12 @@ class RequisiteApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Requisite $requisite
+     * @param Requisite $requisite
      * @return integer|boolean
      */
-    public function create(\AlterEgo\BitrixAPI\classes\Models\Crm\Requisite $requisite)
+    public function create(Requisite $requisite)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->add($requisite->toArray());
 
@@ -57,16 +46,16 @@ class RequisiteApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Requisite $requisite
+     * @param Requisite $requisite
      * @return boolean
      */
-    public function update(\AlterEgo\BitrixAPI\classes\Models\Crm\Requisite $requisite)
+    public function update(Requisite $requisite)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->update($requisite->getId(), $requisite->toArray());
 
-        return $response['result']; // bool
+        return $response['result'];
     }
 
     /**
@@ -75,7 +64,7 @@ class RequisiteApi extends Entity
      */
     public function presetGetList(EntityQuery $query)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->presetGetList(
             $query->getOrder()->asArray(),
@@ -88,12 +77,12 @@ class RequisiteApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Preset $preset
+     * @param Preset $preset
      * @return integer|boolean
      */
-    public function presetCreate(\AlterEgo\BitrixAPI\classes\Models\Crm\Preset $preset)
+    public function presetCreate(Preset $preset)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->presetAdd($preset->toArray());
 
@@ -106,7 +95,7 @@ class RequisiteApi extends Entity
      */
     public function addressGetList(EntityQuery $query)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Address($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Address($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->getList(
             $query->getOrder()->asArray(),
@@ -119,12 +108,12 @@ class RequisiteApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Address $address
+     * @param Address $address
      * @return boolean
      */
-    public function addressCreate(\AlterEgo\BitrixAPI\classes\Models\Crm\Address $address)
+    public function addressCreate(Address $address)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Address($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Address($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->add($address->toArray());
 
@@ -132,12 +121,12 @@ class RequisiteApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Address $address
+     * @param Address $address
      * @return boolean
      */
-    public function addressUpdate(\AlterEgo\BitrixAPI\classes\Models\Crm\Address $address)
+    public function addressUpdate(Address $address)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Address($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Address($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->update($address->toArray());
 
@@ -145,12 +134,12 @@ class RequisiteApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\BankDetail $bankDetail
+     * @param BankDetail $bankDetail
      * @return integer|boolean
      */
-    public function bankDetailCreate(\AlterEgo\BitrixAPI\classes\Models\Crm\BankDetail $bankDetail)
+    public function bankDetailCreate(BankDetail $bankDetail)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->bankdetailAdd($bankDetail->toArray());
 
@@ -158,12 +147,12 @@ class RequisiteApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\BankDetail $bankDetail
+     * @param BankDetail $bankDetail
      * @return boolean
      */
-    public function bankDetailUpdate(\AlterEgo\BitrixAPI\classes\Models\Crm\BankDetail $bankDetail)
+    public function bankDetailUpdate(BankDetail $bankDetail)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->bankdetailUpdate($bankDetail->getId(), $bankDetail->toArray());
 
@@ -176,7 +165,7 @@ class RequisiteApi extends Entity
      */
     public function bankDetailGetList(EntityQuery $query)
     {
-        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixApp());
+        $requisiteApi = new \Bitrix24\CRM\Requisite\Requisite($this->getClient()->getBitrixCloudApp());
 
         $response = $requisiteApi->bankdetailGetList(
             $query->getOrder()->asArray(),

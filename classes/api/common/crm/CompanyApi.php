@@ -4,14 +4,16 @@ namespace AlterEgo\BitrixAPI\Classes\Api\Common\Crm;
 
 use AlterEgo\BitrixAPI\Classes\Entity;
 use AlterEgo\BitrixAPI\Classes\EntityQuery;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\Company;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\InvoiceIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\UserField;
 
 class CompanyApi extends Entity
 {
     /**
      * @param integer $id
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\Company
+     * @return Company
      */
     public function getById($id)
     {
@@ -31,7 +33,7 @@ class CompanyApi extends Entity
     /**
      * @param integer $moeDeloId
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\Company
+     * @return Company
      */
     public function getByMoeDeloId($moeDeloId)
     {
@@ -39,18 +41,18 @@ class CompanyApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Company $company
+     * @param Company $company
      *
-     * @return mixed
+     * @return integer|boolean
      */
-    public function create(\AlterEgo\BitrixAPI\classes\Models\Crm\Company $company)
+    public function create(Company $company)
     {
         return $this->call(__FUNCTION__, array($company));
     }
 
     /**
      * @param string $moeDeloId
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\Company
+     * @return Company
      */
     public function getWithDetailsByMoeDeloId($moeDeloId)
     {
@@ -58,20 +60,20 @@ class CompanyApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Company $company
+     * @param Company $company
      *
      * @return boolean
      */
-    public function update(\AlterEgo\BitrixAPI\classes\Models\Crm\Company $company)
+    public function update(Company $company)
     {
         return $this->call(__FUNCTION__, array($company));
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\UserField $userField
+     * @param UserField $userField
      * @return mixed
      */
-    public function userFieldCreate(\AlterEgo\BitrixAPI\classes\Models\Crm\UserField $userField)
+    public function userFieldCreate(UserField $userField)
     {
         return $this->call(__FUNCTION__, array($userField));
     }
@@ -96,7 +98,7 @@ class CompanyApi extends Entity
 
     /**
      * @param $fieldName
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\UserField
+     * @return UserField
      */
     public function userFieldGetByFieldName($fieldName)
     {

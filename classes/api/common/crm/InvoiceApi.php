@@ -2,19 +2,18 @@
 
 namespace AlterEgo\BitrixAPI\Classes\Api\Common\Crm;
 
-use AlterEgo\BitrixAPI\classes\api\common\Entity;
-use AlterEgo\BitrixAPI\classes\api\common\EntityQuery;
-use AlterEgo\BitrixAPI\classes\api\Filter;
-use AlterEgo\BitrixAPI\classes\api\Order;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserField;
+use AlterEgo\BitrixAPI\Classes\Entity as EntityAbstract;
+use AlterEgo\BitrixAPI\Classes\EntityQuery;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\Invoice;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\InvoiceIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\UserField;
 
-class InvoiceApi extends Entity
+class InvoiceApi extends EntityAbstract
 {
     /**
      * @param integer $id
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice
+     * @return Invoice
      */
     public function getById($id)
     {
@@ -34,7 +33,7 @@ class InvoiceApi extends Entity
     /**
      * @param integer $moeDeloId
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice
+     * @return Invoice
      */
     public function getByMoeDeloId($moeDeloId)
     {
@@ -42,21 +41,21 @@ class InvoiceApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice $invoice
+     * @param Invoice $invoice
      *
      * @return mixed
      */
-    public function create(\AlterEgo\BitrixAPI\classes\Models\Crm\Invoice $invoice)
+    public function create(Invoice $invoice)
     {
         return $this->call(__FUNCTION__, array($invoice));
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice $invoice
+     * @param Invoice $invoice
      *
      * @return boolean
      */
-    public function update(\AlterEgo\BitrixAPI\classes\Models\Crm\Invoice $invoice)
+    public function update(Invoice $invoice)
     {
         return $this->call(__FUNCTION__, array($invoice));
     }
@@ -65,7 +64,7 @@ class InvoiceApi extends Entity
      * @param UserField $userField
      * @return mixed
      */
-    public function userFieldCreate(\AlterEgo\BitrixAPI\classes\Models\Crm\UserField $userField)
+    public function userFieldCreate(UserField $userField)
     {
         return $this->call(__FUNCTION__, array($userField));
     }

@@ -37,8 +37,8 @@ abstract class Entity
         $reflect = new ReflectionClass($this);
 
         $namespaceArray = explode('\\', $reflect->getName());
-        $apiKey = array_search('Api', $namespaceArray);
-        $namespaceArray[++$apiKey] = $this->client->getType();
+        $apiKey = array_search('Classes', $namespaceArray);
+        $namespaceArray[$apiKey + 2] = $this->client->getType();
         $namespace = implode('\\', $namespaceArray);
 
         $reflectionMethod = new ReflectionMethod($namespace, $functionName);

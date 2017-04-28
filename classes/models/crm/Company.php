@@ -40,7 +40,7 @@ class Company
         }
 
         $company->setTitle($array['TITLE']);
-        $company->setUfMoedeloId($array['UF_CRM_' . \AlterEgo\BitrixAPI\classes\Models\Crm\Company::UF_MOEDELO_ID]); // todo: fix (maybe it is only for bitrix24)
+        $company->setUfMoedeloId($array['UF_CRM_' . Company::UF_MOEDELO_ID]); // todo: fix (maybe it is only for bitrix24)
 
         return $company;
     }

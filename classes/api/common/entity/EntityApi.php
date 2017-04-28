@@ -4,7 +4,9 @@ namespace AlterEgo\BitrixAPI\Classes\Api\Common\Entity;
 
 use AlterEgo\BitrixAPI\Classes\Entity as EntityAbstract;
 use AlterEgo\BitrixAPI\Classes\EntityQuery;
-use AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemProperty;
+use AlterEgo\BitrixAPI\Classes\Models\Entity\Entity;
+use AlterEgo\BitrixAPI\Classes\Models\Entity\EntityItem;
+use AlterEgo\BitrixAPI\Classes\Models\Entity\EntityItemProperty;
 use AlterEgo\BitrixAPI\classes\Models\Entity\EntityIterator;
 
 class EntityApi extends EntityAbstract
@@ -12,7 +14,7 @@ class EntityApi extends EntityAbstract
     /**
      * @param string $name
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Entity\Entity
+     * @return Entity
      */
     public function get($name)
     {
@@ -23,7 +25,7 @@ class EntityApi extends EntityAbstract
      * @param string $entityName
      * @param string $code
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Entity\EntityItem
+     * @return EntityItem
      */
     public function itemGet($entityName, $code)
     {
@@ -41,10 +43,10 @@ class EntityApi extends EntityAbstract
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Entity\EntityItem $entityItem
+     * @param EntityItem $entityItem
      * @return mixed
      */
-    public function itemCreate(\AlterEgo\BitrixAPI\classes\Models\Entity\EntityItem $entityItem)
+    public function itemCreate(EntityItem $entityItem)
     {
         return $this->call(__FUNCTION__, array($entityItem));
     }
@@ -79,19 +81,19 @@ class EntityApi extends EntityAbstract
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Entity\EntityItem $entityItem
+     * @param EntityItem $entityItem
      * @return boolean
      */
-    public function itemUpdate(\AlterEgo\BitrixAPI\classes\Models\Entity\EntityItem $entityItem)
+    public function itemUpdate(EntityItem $entityItem)
     {
         return $this->call(__FUNCTION__, array($entityItem));
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemProperty $entityItemProperty
+     * @param EntityItemProperty $entityItemProperty
      * @return boolean
      */
-    public function itemPropertyCreate(\AlterEgo\BitrixAPI\classes\Models\Entity\EntityItemProperty $entityItemProperty)
+    public function itemPropertyCreate(EntityItemProperty $entityItemProperty)
     {
         return $this->call(__FUNCTION__, array($entityItemProperty));
     }
@@ -107,11 +109,11 @@ class EntityApi extends EntityAbstract
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Entity\Entity $entity
+     * @param Entity $entity
      *
      * @return mixed
      */
-    public function create(\AlterEgo\BitrixAPI\classes\Models\Entity\Entity $entity)
+    public function create(Entity $entity)
     {
         return $this->call(__FUNCTION__, array($entity));
     }
@@ -119,7 +121,7 @@ class EntityApi extends EntityAbstract
     /**
      * @param string $entityName
      * @param string $code
-     * @return \AlterEgo\BitrixAPI\classes\Models\Entity\EntityItem|bool
+     * @return EntityItem|bool
      */
     public function isItemExists($entityName, $code)
     {

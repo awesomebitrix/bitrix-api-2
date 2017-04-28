@@ -2,13 +2,13 @@
 
 namespace AlterEgo\BitrixAPI\Classes\Api\BitrixCloud\Crm;
 
-use AlterEgo\BitrixAPI\classes\api\common\Entity;
-use AlterEgo\BitrixAPI\classes\api\common\EntityQuery;
-use AlterEgo\BitrixAPI\classes\api\common\Filter;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserField;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserFieldIterator;
-use Bitrix24\Exceptions\Bitrix24Exception;
+use AlterEgo\BitrixAPI\Classes\Entity;
+use AlterEgo\BitrixAPI\Classes\EntityQuery;
+use AlterEgo\BitrixAPI\Classes\Filter;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\Invoice;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\InvoiceIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\UserField;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\UserFieldIterator;
 
 class InvoiceApi extends Entity
 {
@@ -19,7 +19,7 @@ class InvoiceApi extends Entity
      */
     public function getList(EntityQuery $query)
     {
-        $invoice = new \Bitrix24\CRM\Invoice($this->getClient()->getBitrixApp());
+        $invoice = new \Bitrix24\CRM\Invoice($this->getClient()->getBitrixCloudApp());
 
         $response = $invoice->getList(
             $query->getOrder()->asArray(),
@@ -33,15 +33,15 @@ class InvoiceApi extends Entity
 
     /**
      * @param integer $id
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice
+     * @return Invoice
      */
     public function getById($id)
     {
-        $invoiceApi = new \Bitrix24\CRM\Invoice($this->getClient()->getBitrixApp());
+        $invoiceApi = new \Bitrix24\CRM\Invoice($this->getClient()->getBitrixCloudApp());
 
         $response = $invoiceApi->get($id);
 
-        $invoice = \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice::CreateFromBitrixArray($response['result']);
+        $invoice = Invoice::CreateFromBitrixArray($response['result']);
 
         return $invoice;
     }
@@ -49,20 +49,20 @@ class InvoiceApi extends Entity
     /**
      * @param integer $moeDeloId
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice
+     * @return Invoice
      * @throws \Exception
      */
     public function getByMoeDeloId($moeDeloId)
     {
         $query = new EntityQuery();
-        $query->addWhere('UF_CRM_' . \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice::UF_MOEDELO_ID, Filter::TYPE_EQUAL, $moeDeloId);
-        $query->addWhere('UF_CRM_' . \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice::UF_MOEDELO_ID, Filter::TYPE_NOT_EQUAL, 'null');
+        $query->addWhere('UF_CRM_' . Invoice::UF_MOEDELO_ID, Filter::TYPE_EQUAL, $moeDeloId);
+        $query->addWhere('UF_CRM_' . Invoice::UF_MOEDELO_ID, Filter::TYPE_NOT_EQUAL, 'null');
 
         $query->addSelect('*')->addSelect('UF_*');
 
         $invoiceIterator = $this->getList($query);
 
-        /** @var \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice $invoice */
+        /** @var Invoice $invoice */
         $invoice = $invoiceIterator->current();
 
         if ($invoice->getUfMoedeloId() != $moeDeloId) { // todo: fix it
@@ -73,13 +73,13 @@ class InvoiceApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice $invoice
+     * @param Invoice $invoice
      *
      * @return array
      */
-    public function create(\AlterEgo\BitrixAPI\classes\Models\Crm\Invoice $invoice)
+    public function create(Invoice $invoice)
     {
-        $invoiceApi = new \Bitrix24\CRM\Invoice($this->getClient()->getBitrixApp());
+        $invoiceApi = new \Bitrix24\CRM\Invoice($this->getClient()->getBitrixCloudApp());
 
         $response = $invoiceApi->add($invoice->toArray());
 
@@ -87,13 +87,13 @@ class InvoiceApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Invoice $invoice
+     * @param Invoice $invoice
      *
      * @return boolean
      */
-    public function update(\AlterEgo\BitrixAPI\classes\Models\Crm\Invoice $invoice)
+    public function update(Invoice $invoice)
     {
-        $invoiceApi = new \Bitrix24\CRM\Invoice($this->getClient()->getBitrixApp());
+        $invoiceApi = new \Bitrix24\CRM\Invoice($this->getClient()->getBitrixCloudApp());
 
         $response = $invoiceApi->update($invoice->getId(), $invoice->toArray());
 
@@ -101,13 +101,13 @@ class InvoiceApi extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\UserField $userField
+     * @param UserField $userField
      *
      * @return array
      */
-    public function userFieldCreate(\AlterEgo\BitrixAPI\classes\Models\Crm\UserField $userField)
+    public function userFieldCreate(UserField $userField)
     {
-        $invoiceUserFieldApi = new \Bitrix24\CRM\Invoice\UserField($this->getClient()->getBitrixApp());
+        $invoiceUserFieldApi = new \Bitrix24\CRM\Invoice\UserField($this->getClient()->getBitrixCloudApp());
 
         $response = $invoiceUserFieldApi->add($userField->toArray());
 
@@ -116,7 +116,7 @@ class InvoiceApi extends Entity
 
     public function userFieldDelete($userFieldId)
     {
-        $invoiceUserFieldApi = new \Bitrix24\CRM\Invoice\UserField($this->getClient()->getBitrixApp());
+        $invoiceUserFieldApi = new \Bitrix24\CRM\Invoice\UserField($this->getClient()->getBitrixCloudApp());
 
         $response = $invoiceUserFieldApi->delete($userFieldId);
 
@@ -125,7 +125,7 @@ class InvoiceApi extends Entity
 
     public function userFieldGetList(EntityQuery $query)
     {
-        $invoiceUserField = new \Bitrix24\CRM\Invoice\UserField($this->getClient()->getBitrixApp());
+        $invoiceUserField = new \Bitrix24\CRM\Invoice\UserField($this->getClient()->getBitrixCloudApp());
 
         $response = $invoiceUserField->getList(
             $query->getOrder()->asArray(),

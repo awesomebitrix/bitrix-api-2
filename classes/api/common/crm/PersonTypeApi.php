@@ -2,12 +2,10 @@
 
 namespace AlterEgo\BitrixAPI\Classes\Api\Common\Crm;
 
-use AlterEgo\BitrixAPI\classes\api\common\Entity;
-use AlterEgo\BitrixAPI\classes\api\common\EntityQuery;
-use AlterEgo\BitrixAPI\classes\api\Filter;
-use AlterEgo\BitrixAPI\classes\api\Order;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\PersonTypeIterator;
+use AlterEgo\BitrixAPI\Classes\Entity;
+use AlterEgo\BitrixAPI\Classes\EntityQuery;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\PersonType;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\PersonTypeIterator;
 
 class PersonTypeApi extends Entity
 {
@@ -23,7 +21,7 @@ class PersonTypeApi extends Entity
 
     /**
      * @param $name
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\PersonType
+     * @return PersonType
      */
     public function getByName($name)
     {

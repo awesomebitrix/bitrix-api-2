@@ -4,6 +4,11 @@ namespace AlterEgo\BitrixAPI\Classes\Models\Crm;
 
 use AlterEgo\BitrixAPI\Classes\Iterator;
 
+/**
+ * Class PresetIterator
+ * @package AlterEgo\BitrixAPI\Classes\Models\Crm
+ * @method Preset current()
+ */
 class PresetIterator extends Iterator
 {
     /**

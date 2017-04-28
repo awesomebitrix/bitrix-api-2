@@ -2,15 +2,11 @@
 
 namespace AlterEgo\BitrixAPI\Classes\Api\BitrixCloud\Crm;
 
-
-use AlterEgo\BitrixAPI\classes\api\common\Entity;
-use AlterEgo\BitrixAPI\classes\api\common\EntityQuery;
-use AlterEgo\BitrixAPI\classes\api\common\Filter;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\PersonTypeIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserField;
-use AlterEgo\BitrixAPI\classes\Models\Crm\UserFieldIterator;
-use Bitrix24\Exceptions\Bitrix24Exception;
+use AlterEgo\BitrixAPI\Classes\Entity;
+use AlterEgo\BitrixAPI\Classes\EntityQuery;
+use AlterEgo\BitrixAPI\Classes\Filter;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\PersonType;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\PersonTypeIterator;
 
 class PersonTypeApi extends Entity
 {
@@ -21,7 +17,7 @@ class PersonTypeApi extends Entity
      */
     public function getList(EntityQuery $query)
     {
-        $personType = new \Bitrix24\CRM\PersonType($this->getClient()->getBitrixApp());
+        $personType = new \Bitrix24\CRM\PersonType($this->getClient()->getBitrixCloudApp());
 
         $response = $personType->getList(
             $query->getOrder()->asArray(),
@@ -34,7 +30,7 @@ class PersonTypeApi extends Entity
     /**
      * @param integer $name
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\PersonType
+     * @return PersonType
      * @throws \Exception
      */
     public function getByName($name)

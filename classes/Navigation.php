@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sgavka
- * Date: 27.01.17
- * Time: 17:19
- */
 
 namespace AlterEgo\BitrixAPI\Classes;
 

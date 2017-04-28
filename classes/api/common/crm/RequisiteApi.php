@@ -4,20 +4,20 @@ namespace AlterEgo\BitrixAPI\Classes\Api\Common\Crm;
 
 use AlterEgo\BitrixAPI\Classes\Entity;
 use AlterEgo\BitrixAPI\Classes\EntityQuery;
-use AlterEgo\BitrixAPI\classes\Models\Crm\Address;
-use AlterEgo\BitrixAPI\classes\Models\Crm\AddressIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\BankDetailIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\InvoiceIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\Preset;
-use AlterEgo\BitrixAPI\classes\Models\Crm\PresetIterator;
-use AlterEgo\BitrixAPI\classes\Models\Crm\RequisiteIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\Address;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\AddressIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\BankDetail;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\BankDetailIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\Preset;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\PresetIterator;
+use AlterEgo\BitrixAPI\Classes\Models\Crm\RequisiteIterator;
 
-class Requisite extends Entity
+class RequisiteApi extends Entity
 {
     /**
      * @param integer $id
      *
-     * @return \AlterEgo\BitrixAPI\classes\Models\Crm\Requisite
+     * @return \AlterEgo\BitrixAPI\Classes\Models\Crm\Requisite
      */
     public function getById($id)
     {
@@ -35,21 +35,21 @@ class Requisite extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Requisite $requisite
+     * @param \AlterEgo\BitrixAPI\Classes\Models\Crm\Requisite $requisite
      *
      * @return integer|boolean
      */
-    public function create(\AlterEgo\BitrixAPI\classes\Models\Crm\Requisite $requisite)
+    public function create(\AlterEgo\BitrixAPI\Classes\Models\Crm\Requisite $requisite)
     {
         return $this->call(__FUNCTION__, array($requisite));
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Requisite $requisite
+     * @param \AlterEgo\BitrixAPI\Classes\Models\Crm\Requisite $requisite
      *
      * @return boolean
      */
-    public function update(\AlterEgo\BitrixAPI\classes\Models\Crm\Requisite $requisite)
+    public function update(\AlterEgo\BitrixAPI\Classes\Models\Crm\Requisite $requisite)
     {
         return $this->call(__FUNCTION__, array($requisite));
     }
@@ -65,31 +65,31 @@ class Requisite extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Preset $preset
+     * @param Preset $preset
      *
      * @return integer|boolean
      */
-    public function presetCreate(\AlterEgo\BitrixAPI\classes\Models\Crm\Preset $preset)
+    public function presetCreate(Preset $preset)
     {
         return $this->call(__FUNCTION__, array($preset));
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Address $address
+     * @param Address $address
      *
      * @return integer|boolean
      */
-    public function addressCreate(\AlterEgo\BitrixAPI\classes\Models\Crm\Address $address)
+    public function addressCreate(Address $address)
     {
         return $this->call(__FUNCTION__, array($address));
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\Address $address
+     * @param Address $address
      *
      * @return boolean
      */
-    public function addressUpdate(\AlterEgo\BitrixAPI\classes\Models\Crm\Address $address)
+    public function addressUpdate(Address $address)
     {
         return $this->call(__FUNCTION__, array($address));
     }
@@ -105,21 +105,21 @@ class Requisite extends Entity
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\BankDetail $bankDetail
+     * @param BankDetail $bankDetail
      *
      * @return integer|boolean
      */
-    public function bankDetailCreate(\AlterEgo\BitrixAPI\classes\Models\Crm\BankDetail $bankDetail)
+    public function bankDetailCreate(BankDetail $bankDetail)
     {
         return $this->call(__FUNCTION__, array($bankDetail));
     }
 
     /**
-     * @param \AlterEgo\BitrixAPI\classes\Models\Crm\BankDetail $bankDetail
+     * @param BankDetail $bankDetail
      *
      * @return boolean
      */
-    public function bankDetailUpdate(\AlterEgo\BitrixAPI\classes\Models\Crm\BankDetail $bankDetail)
+    public function bankDetailUpdate(BankDetail $bankDetail)
     {
         return $this->call(__FUNCTION__, array($bankDetail));
     }

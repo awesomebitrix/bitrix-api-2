@@ -4,6 +4,11 @@ namespace AlterEgo\BitrixAPI\Classes\Models\Crm;
 
 use AlterEgo\BitrixAPI\Classes\Iterator;
 
+/**
+ * Class CompanyIterator
+ * @package AlterEgo\BitrixAPI\Classes\Models\Crm
+ * @method Company current()
+ */
 class CompanyIterator extends Iterator
 {
     /**

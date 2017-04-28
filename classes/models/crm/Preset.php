@@ -50,6 +50,7 @@ class Preset
 
         $address->setId($array['ID']);
         $address->setEntityTypeId($array['ENTITY_TYPE_ID']);
+        // todo: continue
 
         return $address;
     }
